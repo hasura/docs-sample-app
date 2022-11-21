@@ -1,0 +1,7 @@
+- "!include public_cart_items.yaml"
+- "!include public_carts.yaml"
+- "!include public_categories.yaml"
+- "!include public_manufacturers.yaml"
+- "!include public_products.yaml"
+- "!include public_reviews.yaml"
+- "!include public_users.yaml"

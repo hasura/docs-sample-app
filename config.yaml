@@ -1,0 +1,7 @@
+version: 3
+endpoint: https://emerging-pangolin-82.hasura.app/
+admin_secret: 142xHBtQ9fppZwk1rVVu7TujdsvvKqfyMRN0saGhTIKBZXwUmFmo3A1FbC2dPomf
+metadata_directory: metadata
+actions:
+  kind: synchronous
+  handler_webhook_baseurl: http://localhost:3000
