@@ -1,6 +1,7 @@
 SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET escape_string_warning = off;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -20,7 +21,9 @@ CREATE TABLE public.cart_items (
 );
 CREATE TABLE public.carts (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    user_id uuid NOT NULL
+    user_id uuid NOT NULL,
+    is_complete boolean DEFAULT false NOT NULL,
+    created_at timestamp with time zone DEFAULT now()
 );
 CREATE TABLE public.categories (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
@@ -37,7 +40,8 @@ CREATE TABLE public.products (
     price integer NOT NULL,
     manufacturer uuid NOT NULL,
     category uuid NOT NULL,
-    image text NOT NULL
+    image text NOT NULL,
+    country_of_origin text NOT NULL
 );
 CREATE TABLE public.reviews (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
