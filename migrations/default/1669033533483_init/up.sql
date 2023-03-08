@@ -1,6 +1,7 @@
 SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET escape_string_warning = off;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -20,7 +21,9 @@ CREATE TABLE public.cart_items (
 );
 CREATE TABLE public.carts (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
-    user_id uuid NOT NULL
+    user_id uuid NOT NULL,
+    is_complete boolean DEFAULT false NOT NULL,
+    created_at timestamp with time zone DEFAULT now()
 );
 CREATE TABLE public.categories (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
@@ -37,7 +40,8 @@ CREATE TABLE public.products (
     price integer NOT NULL,
     manufacturer uuid NOT NULL,
     category uuid NOT NULL,
-    image text NOT NULL
+    image text NOT NULL,
+    country_of_origin text NOT NULL
 );
 CREATE TABLE public.reviews (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
@@ -47,6 +51,19 @@ CREATE TABLE public.reviews (
     text text NOT NULL,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now()
+);
+CREATE TABLE public.threads (
+    id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    user_id uuid NOT NULL,
+    created_at timestamp with time zone DEFAULT now()
+);
+CREATE TABLE public.messages (
+    id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
+    thread_id uuid NOT NULL,
+    user_id uuid NOT NULL,
+    body text NOT NULL,
+    created_at timestamp with time zone DEFAULT now(),
+    is_read boolean DEFAULT false NOT NULL
 );
 CREATE TABLE public.users (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
@@ -67,6 +84,10 @@ ALTER TABLE ONLY public.reviews
     ADD CONSTRAINT reviews_pkey PRIMARY KEY (id);
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY public.threads
+    ADD CONSTRAINT threads_pkey PRIMARY KEY (id);
 CREATE TRIGGER set_public_reviews_updated_at BEFORE UPDATE ON public.reviews FOR EACH ROW EXECUTE FUNCTION public.set_current_timestamp_updated_at();
 COMMENT ON TRIGGER set_public_reviews_updated_at ON public.reviews IS 'trigger to set value of column "updated_at" to current timestamp on row update';
 ALTER TABLE ONLY public.cart_items
@@ -83,3 +104,7 @@ ALTER TABLE ONLY public.reviews
     ADD CONSTRAINT reviews_product_id_foreign FOREIGN KEY (product_id) REFERENCES public.products(id);
 ALTER TABLE ONLY public.reviews
     ADD CONSTRAINT reviews_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_thread_id_foreign FOREIGN KEY (thread_id) REFERENCES public.threads(id);
+ALTER TABLE ONLY public.messages
+    ADD CONSTRAINT messages_user_id_foreign FOREIGN KEY (user_id) REFERENCES public.users(id);
