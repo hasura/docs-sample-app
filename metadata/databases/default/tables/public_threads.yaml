@@ -4,4 +4,8 @@ table:
 array_relationships:
   - name: messages
     using:
-      foreign_key_constraint_on: thread_id
+      foreign_key_constraint_on: 
+        column: thread_id
+        table:
+          name: messages
+          schema: public
