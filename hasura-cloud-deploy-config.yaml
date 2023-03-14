@@ -1,4 +1,4 @@
 name: "Docs Sample App"
 
 static-env:
-  HASURA_GRAPHQL_ADMIN_SECRET: 142xHBtQ9fppZwk1rVVu7TujdsvvKqfyMRN0saGhTIKBZXwUmFmo3A1FbC2dPomf
+  HASURA_GRAPHQL_ADMIN_SECRET: oursupersecretsupersecurekey1234567890
