@@ -1,6 +1,6 @@
 version: 3
-endpoint: https://emerging-pangolin-82.hasura.app/
-admin_secret: 142xHBtQ9fppZwk1rVVu7TujdsvvKqfyMRN0saGhTIKBZXwUmFmo3A1FbC2dPomf
+endpoint: https://sample-app-update.hasura.app/
+admin_secret: LJ18PnXougoimmWsqrmyD2pNGoqFsYO8ei41LeEiD5LzwJAFODhAVp2o6P6tkB2a
 metadata_directory: metadata
 actions:
   kind: synchronous
