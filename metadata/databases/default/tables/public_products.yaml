@@ -23,3 +23,9 @@ array_relationships:
         table:
           name: reviews
           schema: public
+computed_fields:
+  - name: similar_products
+    definition:
+      function:
+        name: search_similar_products
+        schema: public
