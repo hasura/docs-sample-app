@@ -16,6 +16,13 @@ array_relationships:
         table:
           name: cart_items
           schema: public
+  - name: orders
+    using:
+      foreign_key_constraint_on:
+        column: product_id
+        table:
+          name: orders
+          schema: public
   - name: reviews
     using:
       foreign_key_constraint_on:

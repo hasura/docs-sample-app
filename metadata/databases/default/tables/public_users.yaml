@@ -9,17 +9,31 @@ array_relationships:
         table:
           name: carts
           schema: public
+  - name: coupons
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: coupons
+          schema: public
+  - name: notifications
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: notifications
+          schema: public
+  - name: orders
+    using:
+      foreign_key_constraint_on:
+        column: user_id
+        table:
+          name: orders
+          schema: public
   - name: reviews
     using:
       foreign_key_constraint_on:
         column: user_id
         table:
           name: reviews
-          schema: public
-  - name: messages
-    using:
-      foreign_key_constraint_on:
-        column: user_id
-        table:
-          name: messages
           schema: public
