@@ -35,7 +35,9 @@ CREATE TABLE public.coupons (
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     user_id uuid NOT NULL,
     code text NOT NULL,
-    expiration_date timestamp with time zone NOT NULL
+    expiration_date timestamp with time zone NOT NULL,
+    amount integer,
+    percent_or_value text
 );
 CREATE TABLE public.manufacturers (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
