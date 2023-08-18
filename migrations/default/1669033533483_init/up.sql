@@ -1,4 +1,7 @@
+SET standard_conforming_strings = off;
 SET check_function_bodies = false;
+SET escape_string_warning = off;
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
