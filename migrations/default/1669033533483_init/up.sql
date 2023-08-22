@@ -82,6 +82,7 @@ CREATE TABLE public.reviews (
     user_id uuid NOT NULL,
     rating integer NOT NULL,
     text text NOT NULL,
+    is_visible boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
