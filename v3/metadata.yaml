@@ -1,0 +1,1341 @@
+metadata:
+  - name: default
+    kind: postgresDataSource
+    postgres_database_url: <YOUR_POSTGRES_URL>
+    tables:
+      cart_items:
+        schema_name: public
+        table_name: cart_items
+        columns:
+          cart_id:
+            name: cart_id
+          created_at:
+            name: created_at
+          id:
+            name: id
+          product_id:
+            name: product_id
+          quantity:
+            name: quantity
+          updated_at:
+            name: updated_at
+        uniqueness_constraints:
+          cart_items_pkey:
+            - id
+        foreign_relations:
+          cart_items_cart_id_foreign:
+            foreign_table: carts
+            column_mapping:
+              cart_id: id
+          cart_items_product_id_foreign:
+            foreign_table: products
+            column_mapping:
+              product_id: id
+      carts:
+        schema_name: public
+        table_name: carts
+        columns:
+          created_at:
+            name: created_at
+          id:
+            name: id
+          is_complete:
+            name: is_complete
+          updated_at:
+            name: updated_at
+          user_id:
+            name: user_id
+        uniqueness_constraints:
+          carts_pkey:
+            - id
+        foreign_relations:
+          carts_user_id_foreign:
+            foreign_table: users
+            column_mapping:
+              user_id: id
+      categories:
+        schema_name: public
+        table_name: categories
+        columns:
+          id:
+            name: id
+          name:
+            name: name
+        uniqueness_constraints:
+          categories_pkey:
+            - id
+        foreign_relations: {}
+      coupons:
+        schema_name: public
+        table_name: coupons
+        columns:
+          amount:
+            name: amount
+          code:
+            name: code
+          created_at:
+            name: created_at
+          expiration_date:
+            name: expiration_date
+          id:
+            name: id
+          percent_or_value:
+            name: percent_or_value
+          updated_at:
+            name: updated_at
+          user_id:
+            name: user_id
+        uniqueness_constraints:
+          coupons_pkey:
+            - id
+        foreign_relations:
+          coupons_user_id_fkey:
+            foreign_table: users
+            column_mapping:
+              user_id: id
+      manufacturers:
+        schema_name: public
+        table_name: manufacturers
+        columns:
+          id:
+            name: id
+          name:
+            name: name
+        uniqueness_constraints:
+          manufacturers_pkey:
+            - id
+        foreign_relations: {}
+      notifications:
+        schema_name: public
+        table_name: notifications
+        columns:
+          created_at:
+            name: created_at
+          id:
+            name: id
+          message:
+            name: message
+          updated_at:
+            name: updated_at
+          user_id:
+            name: user_id
+        uniqueness_constraints:
+          notifications_pkey:
+            - id
+        foreign_relations:
+          notifications_user_id_fkey:
+            foreign_table: users
+            column_mapping:
+              user_id: id
+      orders:
+        schema_name: public
+        table_name: orders
+        columns:
+          created_at:
+            name: created_at
+          delivery_date:
+            name: delivery_date
+          id:
+            name: id
+          is_reviewed:
+            name: is_reviewed
+          product_id:
+            name: product_id
+          status:
+            name: status
+          updated_at:
+            name: updated_at
+          user_id:
+            name: user_id
+        uniqueness_constraints:
+          orders_pkey:
+            - id
+        foreign_relations:
+          orders_customer_id_fkey:
+            foreign_table: users
+            column_mapping:
+              user_id: id
+          orders_product_id_fkey:
+            foreign_table: products
+            column_mapping:
+              product_id: id
+      products:
+        schema_name: public
+        table_name: products
+        columns:
+          category:
+            name: category
+          country_of_origin:
+            name: country_of_origin
+          created_at:
+            name: created_at
+          description:
+            name: description
+          id:
+            name: id
+          image:
+            name: image
+          manufacturer:
+            name: manufacturer
+          name:
+            name: name
+          price:
+            name: price
+          updated_at:
+            name: updated_at
+        uniqueness_constraints:
+          products_pkey:
+            - id
+        foreign_relations:
+          products_category_foreign:
+            foreign_table: categories
+            column_mapping:
+              category: id
+          products_manufacturer_foreign:
+            foreign_table: manufacturers
+            column_mapping:
+              manufacturer: id
+      reviews:
+        schema_name: public
+        table_name: reviews
+        columns:
+          created_at:
+            name: created_at
+          id:
+            name: id
+          is_visible:
+            name: is_visible
+          product_id:
+            name: product_id
+          rating:
+            name: rating
+          text:
+            name: text
+          updated_at:
+            name: updated_at
+          user_id:
+            name: user_id
+        uniqueness_constraints:
+          reviews_pkey:
+            - id
+        foreign_relations:
+          reviews_product_id_foreign:
+            foreign_table: products
+            column_mapping:
+              product_id: id
+          reviews_user_id_foreign:
+            foreign_table: users
+            column_mapping:
+              user_id: id
+      users:
+        schema_name: public
+        table_name: users
+        columns:
+          created_at:
+            name: created_at
+          email:
+            name: email
+          id:
+            name: id
+          is_email_verified:
+            name: is_email_verified
+          last_seen:
+            name: last_seen
+          name:
+            name: name
+          password:
+            name: password
+          updated_at:
+            name: updated_at
+        uniqueness_constraints:
+          users_pkey:
+            - id
+        foreign_relations: {}
+    version: 1
+    aggregate_functions:
+      Int:
+        avg:
+          return_type: Int
+        bit_and:
+          return_type: Int
+        bit_or:
+          return_type: Int
+        bit_xor:
+          return_type: Int
+        count:
+          return_type: Int
+        dense_rank:
+          return_type: Int
+        max:
+          return_type: Int
+        min:
+          return_type: Int
+        ntile:
+          return_type: Int
+        rank:
+          return_type: Int
+        regr_count:
+          return_type: Int
+        row_number:
+          return_type: Int
+        stddev:
+          return_type: Int
+        stddev_pop:
+          return_type: Int
+        stddev_samp:
+          return_type: Int
+        sum:
+          return_type: Int
+        var_pop:
+          return_type: Int
+        var_samp:
+          return_type: Int
+        variance:
+          return_type: Int
+      String:
+        max:
+          return_type: String
+        min:
+          return_type: String
+        string_agg:
+          return_type: String
+  - kind: scalarTypeRepresentation
+    dataSource: default
+    scalarType: any
+    representation: String
+  - kind: newType
+    name: any
+  - kind: graphqlType
+    typeName: any
+    graphqlTypeName: any
+    graphqlTypeKind: Scalar
+  - kind: model
+    name: cart_items
+    dataType: cart_items
+  - kind: objectType
+    name: cart_items
+    fields:
+      - name: cart_id
+        type: any
+      - name: created_at
+        type: any
+      - name: id
+        type: any
+      - name: product_id
+        type: any
+      - name: quantity
+        type: any
+      - name: updated_at
+        type: any
+  - kind: modelSource
+    modelName: cart_items
+    dataSource: default
+    table: cart_items
+    typeMappings:
+      cart_items:
+        fieldMappings:
+          cart_id:
+            column: cart_id
+          created_at:
+            column: created_at
+          id:
+            column: id
+          product_id:
+            column: product_id
+          quantity:
+            column: quantity
+          updated_at:
+            column: updated_at
+  - kind: graphqlType
+    typeName: cart_items
+    graphqlTypeName: cart_items
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: cart_items
+    selectUniques:
+      - queryRootField: cart_items_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: cart_items
+  - kind: relationship
+    name: cart_items
+    source: carts
+    target:
+      modelName: cart_items
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: cart_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: cart_items
+    source: products
+    target:
+      modelName: cart_items
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: cart
+    source: cart_items
+    target:
+      modelName: carts
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: cart_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: product
+    source: cart_items
+    target:
+      modelName: products
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: cart_items
+    outputPermissions:
+      admin:
+        fields:
+          - cart_id
+          - created_at
+          - id
+          - product_id
+          - quantity
+          - updated_at
+      user:
+        fields:
+          - cart_id
+          - created_at
+          - id
+          - product_id
+          - quantity
+          - updated_at
+  - kind: modelSelectPermissions
+    modelName: cart_items
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: carts
+    dataType: carts
+  - kind: objectType
+    name: carts
+    fields:
+      - name: created_at
+        type: any
+      - name: id
+        type: any
+      - name: is_complete
+        type: any
+      - name: updated_at
+        type: any
+      - name: user_id
+        type: any
+  - kind: modelSource
+    modelName: carts
+    dataSource: default
+    table: carts
+    typeMappings:
+      carts:
+        fieldMappings:
+          created_at:
+            column: created_at
+          id:
+            column: id
+          is_complete:
+            column: is_complete
+          updated_at:
+            column: updated_at
+          user_id:
+            column: user_id
+  - kind: graphqlType
+    typeName: carts
+    graphqlTypeName: carts
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: carts
+    selectUniques:
+      - queryRootField: carts_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: carts
+  - kind: relationship
+    name: carts
+    source: users
+    target:
+      modelName: carts
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: user
+    source: carts
+    target:
+      modelName: users
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: carts
+    outputPermissions:
+      admin:
+        fields:
+          - created_at
+          - id
+          - is_complete
+          - updated_at
+          - user_id
+      user:
+        fields:
+          - created_at
+          - id
+          - is_complete
+          - updated_at
+          - user_id
+  - kind: modelSelectPermissions
+    modelName: carts
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: categories
+    dataType: categories
+  - kind: objectType
+    name: categories
+    fields:
+      - name: id
+        type: any
+      - name: name
+        type: any
+  - kind: modelSource
+    modelName: categories
+    dataSource: default
+    table: categories
+    typeMappings:
+      categories:
+        fieldMappings:
+          id:
+            column: id
+          name:
+            column: name
+  - kind: graphqlType
+    typeName: categories
+    graphqlTypeName: categories
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: categories
+    selectUniques:
+      - queryRootField: categories_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: categories
+  - kind: typeOutputPermissions
+    typeName: categories
+    outputPermissions:
+      admin:
+        fields:
+          - id
+          - name
+      user:
+        fields:
+          - id
+          - name
+  - kind: modelSelectPermissions
+    modelName: categories
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: coupons
+    dataType: coupons
+  - kind: objectType
+    name: coupons
+    fields:
+      - name: amount
+        type: any
+      - name: code
+        type: any
+      - name: created_at
+        type: any
+      - name: expiration_date
+        type: any
+      - name: id
+        type: any
+      - name: percent_or_value
+        type: any
+      - name: updated_at
+        type: any
+      - name: user_id
+        type: any
+  - kind: modelSource
+    modelName: coupons
+    dataSource: default
+    table: coupons
+    typeMappings:
+      coupons:
+        fieldMappings:
+          amount:
+            column: amount
+          code:
+            column: code
+          created_at:
+            column: created_at
+          expiration_date:
+            column: expiration_date
+          id:
+            column: id
+          percent_or_value:
+            column: percent_or_value
+          updated_at:
+            column: updated_at
+          user_id:
+            column: user_id
+  - kind: graphqlType
+    typeName: coupons
+    graphqlTypeName: coupons
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: coupons
+    selectUniques:
+      - queryRootField: coupons_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: coupons
+  - kind: relationship
+    name: coupons
+    source: users
+    target:
+      modelName: coupons
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: user
+    source: coupons
+    target:
+      modelName: users
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: coupons
+    outputPermissions:
+      admin:
+        fields:
+          - amount
+          - code
+          - created_at
+          - expiration_date
+          - id
+          - percent_or_value
+          - updated_at
+          - user_id
+      user:
+        fields:
+          - amount
+          - code
+          - created_at
+          - expiration_date
+          - id
+          - percent_or_value
+          - updated_at
+          - user_id
+  - kind: modelSelectPermissions
+    modelName: coupons
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: manufacturers
+    dataType: manufacturers
+  - kind: objectType
+    name: manufacturers
+    fields:
+      - name: id
+        type: any
+      - name: name
+        type: any
+  - kind: modelSource
+    modelName: manufacturers
+    dataSource: default
+    table: manufacturers
+    typeMappings:
+      manufacturers:
+        fieldMappings:
+          id:
+            column: id
+          name:
+            column: name
+  - kind: graphqlType
+    typeName: manufacturers
+    graphqlTypeName: manufacturers
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: manufacturers
+    selectUniques:
+      - queryRootField: manufacturers_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: manufacturers
+  - kind: typeOutputPermissions
+    typeName: manufacturers
+    outputPermissions:
+      admin:
+        fields:
+          - id
+          - name
+      user:
+        fields:
+          - id
+          - name
+  - kind: modelSelectPermissions
+    modelName: manufacturers
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: notifications
+    dataType: notifications
+  - kind: objectType
+    name: notifications
+    fields:
+      - name: created_at
+        type: any
+      - name: id
+        type: any
+      - name: message
+        type: any
+      - name: updated_at
+        type: any
+      - name: user_id
+        type: any
+  - kind: modelSource
+    modelName: notifications
+    dataSource: default
+    table: notifications
+    typeMappings:
+      notifications:
+        fieldMappings:
+          created_at:
+            column: created_at
+          id:
+            column: id
+          message:
+            column: message
+          updated_at:
+            column: updated_at
+          user_id:
+            column: user_id
+  - kind: graphqlType
+    typeName: notifications
+    graphqlTypeName: notifications
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: notifications
+    selectUniques:
+      - queryRootField: notifications_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: notifications
+  - kind: relationship
+    name: notifications
+    source: users
+    target:
+      modelName: notifications
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: user
+    source: notifications
+    target:
+      modelName: users
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: notifications
+    outputPermissions:
+      admin:
+        fields:
+          - created_at
+          - id
+          - message
+          - updated_at
+          - user_id
+      user:
+        fields:
+          - created_at
+          - id
+          - message
+          - updated_at
+          - user_id
+  - kind: modelSelectPermissions
+    modelName: notifications
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: orders
+    dataType: orders
+  - kind: objectType
+    name: orders
+    fields:
+      - name: created_at
+        type: any
+      - name: delivery_date
+        type: any
+      - name: id
+        type: any
+      - name: is_reviewed
+        type: any
+      - name: product_id
+        type: any
+      - name: status
+        type: any
+      - name: updated_at
+        type: any
+      - name: user_id
+        type: any
+  - kind: modelSource
+    modelName: orders
+    dataSource: default
+    table: orders
+    typeMappings:
+      orders:
+        fieldMappings:
+          created_at:
+            column: created_at
+          delivery_date:
+            column: delivery_date
+          id:
+            column: id
+          is_reviewed:
+            column: is_reviewed
+          product_id:
+            column: product_id
+          status:
+            column: status
+          updated_at:
+            column: updated_at
+          user_id:
+            column: user_id
+  - kind: graphqlType
+    typeName: orders
+    graphqlTypeName: orders
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: orders
+    selectUniques:
+      - queryRootField: orders_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: orders
+  - kind: relationship
+    name: orders
+    source: users
+    target:
+      modelName: orders
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: orders
+    source: products
+    target:
+      modelName: orders
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: user
+    source: orders
+    target:
+      modelName: users
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: product
+    source: orders
+    target:
+      modelName: products
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: orders
+    outputPermissions:
+      admin:
+        fields:
+          - created_at
+          - delivery_date
+          - id
+          - is_reviewed
+          - product_id
+          - status
+          - updated_at
+          - user_id
+      user:
+        fields:
+          - created_at
+          - delivery_date
+          - id
+          - is_reviewed
+          - product_id
+          - status
+          - updated_at
+          - user_id
+  - kind: modelSelectPermissions
+    modelName: orders
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: products
+    dataType: products
+  - kind: objectType
+    name: products
+    fields:
+      - name: category
+        type: any
+      - name: country_of_origin
+        type: any
+      - name: created_at
+        type: any
+      - name: description
+        type: any
+      - name: id
+        type: any
+      - name: image
+        type: any
+      - name: manufacturer
+        type: any
+      - name: name
+        type: any
+      - name: price
+        type: any
+      - name: updated_at
+        type: any
+  - kind: modelSource
+    modelName: products
+    dataSource: default
+    table: products
+    typeMappings:
+      products:
+        fieldMappings:
+          category:
+            column: category
+          country_of_origin:
+            column: country_of_origin
+          created_at:
+            column: created_at
+          description:
+            column: description
+          id:
+            column: id
+          image:
+            column: image
+          manufacturer:
+            column: manufacturer
+          name:
+            column: name
+          price:
+            column: price
+          updated_at:
+            column: updated_at
+  - kind: graphqlType
+    typeName: products
+    graphqlTypeName: products
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: products
+    selectUniques:
+      - queryRootField: products_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: products
+  - kind: relationship
+    name: products
+    source: categories
+    target:
+      modelName: products
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: category
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: products
+    source: manufacturers
+    target:
+      modelName: products
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: manufacturer
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: category
+    source: products
+    target:
+      modelName: categories
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: category
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: manufacturer
+    source: products
+    target:
+      modelName: manufacturers
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: manufacturer
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: products
+    outputPermissions:
+      admin:
+        fields:
+          - category
+          - country_of_origin
+          - created_at
+          - description
+          - id
+          - image
+          - manufacturer
+          - name
+          - price
+          - updated_at
+      user:
+        fields:
+          - category
+          - country_of_origin
+          - created_at
+          - description
+          - id
+          - image
+          - manufacturer
+          - name
+          - price
+          - updated_at
+  - kind: modelSelectPermissions
+    modelName: products
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: reviews
+    dataType: reviews
+  - kind: objectType
+    name: reviews
+    fields:
+      - name: created_at
+        type: any
+      - name: id
+        type: any
+      - name: is_visible
+        type: any
+      - name: product_id
+        type: any
+      - name: rating
+        type: any
+      - name: text
+        type: any
+      - name: updated_at
+        type: any
+      - name: user_id
+        type: any
+  - kind: modelSource
+    modelName: reviews
+    dataSource: default
+    table: reviews
+    typeMappings:
+      reviews:
+        fieldMappings:
+          created_at:
+            column: created_at
+          id:
+            column: id
+          is_visible:
+            column: is_visible
+          product_id:
+            column: product_id
+          rating:
+            column: rating
+          text:
+            column: text
+          updated_at:
+            column: updated_at
+          user_id:
+            column: user_id
+  - kind: graphqlType
+    typeName: reviews
+    graphqlTypeName: reviews
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: reviews
+    selectUniques:
+      - queryRootField: reviews_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: reviews
+  - kind: relationship
+    name: reviews
+    source: products
+    target:
+      modelName: reviews
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: reviews
+    source: users
+    target:
+      modelName: reviews
+      relationshipType: Array
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: product
+    source: reviews
+    target:
+      modelName: products
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: product_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: relationship
+    name: user
+    source: reviews
+    target:
+      modelName: users
+      relationshipType: Object
+    mappings:
+      - source:
+          fieldPath:
+            - fieldName: user_id
+        target:
+          modelField:
+            - fieldName: id
+  - kind: typeOutputPermissions
+    typeName: reviews
+    outputPermissions:
+      admin:
+        fields:
+          - created_at
+          - id
+          - is_visible
+          - product_id
+          - rating
+          - text
+          - updated_at
+          - user_id
+      user:
+        fields:
+          - created_at
+          - id
+          - is_visible
+          - product_id
+          - rating
+          - text
+          - updated_at
+          - user_id
+  - kind: modelSelectPermissions
+    modelName: reviews
+    selectPermissions:
+      admin: {}
+      user: {}
+  - kind: model
+    name: users
+    dataType: users
+  - kind: objectType
+    name: users
+    fields:
+      - name: created_at
+        type: any
+      - name: email
+        type: any
+      - name: id
+        type: any
+      - name: is_email_verified
+        type: any
+      - name: last_seen
+        type: any
+      - name: name
+        type: any
+      - name: password
+        type: any
+      - name: updated_at
+        type: any
+  - kind: modelSource
+    modelName: users
+    dataSource: default
+    table: users
+    typeMappings:
+      users:
+        fieldMappings:
+          created_at:
+            column: created_at
+          email:
+            column: email
+          id:
+            column: id
+          is_email_verified:
+            column: is_email_verified
+          last_seen:
+            column: last_seen
+          name:
+            column: name
+          password:
+            column: password
+          updated_at:
+            column: updated_at
+  - kind: graphqlType
+    typeName: users
+    graphqlTypeName: users
+    graphqlTypeKind: Object
+  - kind: modelGraphqlApi
+    modelName: users
+    selectUniques:
+      - queryRootField: users_pkey
+        uniqueIdentifier:
+          - id
+    selectMany:
+      queryRootField: users
+  - kind: typeOutputPermissions
+    typeName: users
+    outputPermissions:
+      admin:
+        fields:
+          - created_at
+          - email
+          - id
+          - is_email_verified
+          - last_seen
+          - name
+          - password
+          - updated_at
+      user:
+        fields:
+          - created_at
+          - email
+          - id
+          - is_email_verified
+          - last_seen
+          - name
+          - password
+          - updated_at
+  - kind: modelSelectPermissions
+    modelName: users
+    selectPermissions:
+      admin: {}
+      user: {}
+data_connectors:
+  postgres: http://localhost:4000/deployment/
