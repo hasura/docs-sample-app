@@ -367,10 +367,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: cart_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: cart_id
   - kind: relationship
     name: cart_items
     source: products
@@ -488,10 +488,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: relationship
     name: user
     source: carts
@@ -501,10 +501,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: typeOutputPermissions
     typeName: carts
     outputPermissions:
@@ -642,10 +642,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: relationship
     name: user
     source: coupons
@@ -655,10 +655,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: typeOutputPermissions
     typeName: coupons
     outputPermissions:
@@ -790,10 +790,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: relationship
     name: user
     source: notifications
@@ -895,10 +895,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: relationship
     name: orders
     source: products
@@ -908,10 +908,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: product_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: product_id
   - kind: relationship
     name: user
     source: orders
@@ -1040,10 +1040,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: category
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: category
   - kind: relationship
     name: products
     source: manufacturers
@@ -1053,12 +1053,12 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: manufacturer
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: manufacturer
   - kind: relationship
-    name: category
+    name: theCategory
     source: products
     target:
       modelName: categories
@@ -1071,7 +1071,7 @@ metadata:
           modelField:
             - fieldName: id
   - kind: relationship
-    name: manufacturer
+    name: theManufacturer
     source: products
     target:
       modelName: manufacturers
@@ -1181,10 +1181,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: product_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: product_id
   - kind: relationship
     name: reviews
     source: users
@@ -1194,10 +1194,10 @@ metadata:
     mappings:
       - source:
           fieldPath:
-            - fieldName: user_id
+            - fieldName: id
         target:
           modelField:
-            - fieldName: id
+            - fieldName: user_id
   - kind: relationship
     name: product
     source: reviews
