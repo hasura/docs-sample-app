@@ -25,6 +25,7 @@ CREATE TABLE public.carts (
     id uuid DEFAULT public.uuid_generate_v1() NOT NULL,
     user_id uuid NOT NULL,
     is_complete boolean DEFAULT false NOT NULL,
+    is_reminder_sent boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now()
 );
@@ -81,6 +82,7 @@ CREATE TABLE public.reviews (
     user_id uuid NOT NULL,
     rating integer NOT NULL,
     text text NOT NULL,
+    is_visible boolean DEFAULT false NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
