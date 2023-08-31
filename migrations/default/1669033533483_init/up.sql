@@ -69,8 +69,8 @@ CREATE TABLE public.products (
     name text NOT NULL,
     description text NOT NULL,
     price integer NOT NULL,
-    manufacturer uuid NOT NULL,
-    category uuid NOT NULL,
+    manufacturer_id uuid NOT NULL,
+    category_id uuid NOT NULL,
     image text NOT NULL,
     country_of_origin text NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -147,9 +147,9 @@ ALTER TABLE ONLY public.orders
 ALTER TABLE ONLY public.orders
     ADD CONSTRAINT orders_product_id_fkey FOREIGN KEY (product_id) REFERENCES public.products(id) ON UPDATE CASCADE;
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_category_foreign FOREIGN KEY (category) REFERENCES public.categories(id);
+    ADD CONSTRAINT products_category_foreign FOREIGN KEY (category_id) REFERENCES public.categories(id);
 ALTER TABLE ONLY public.products
-    ADD CONSTRAINT products_manufacturer_foreign FOREIGN KEY (manufacturer) REFERENCES public.manufacturers(id);
+    ADD CONSTRAINT products_manufacturer_foreign FOREIGN KEY (manufacturer_id) REFERENCES public.manufacturers(id);
 ALTER TABLE ONLY public.reviews
     ADD CONSTRAINT reviews_product_id_foreign FOREIGN KEY (product_id) REFERENCES public.products(id);
 ALTER TABLE ONLY public.reviews
