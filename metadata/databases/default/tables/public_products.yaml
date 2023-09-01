@@ -4,10 +4,10 @@ table:
 object_relationships:
   - name: categoryByCategory
     using:
-      foreign_key_constraint_on: category
+      foreign_key_constraint_on: category_id
   - name: manufacturerByManufacturer
     using:
-      foreign_key_constraint_on: manufacturer
+      foreign_key_constraint_on: manufacturer_id
 array_relationships:
   - name: cart_items
     using:

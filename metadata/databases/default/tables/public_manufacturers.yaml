@@ -5,7 +5,7 @@ array_relationships:
   - name: products
     using:
       foreign_key_constraint_on:
-        column: manufacturer
+        column: manufacturer_id
         table:
           name: products
           schema: public
