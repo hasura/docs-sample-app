@@ -22,4 +22,19 @@ Event Triggers are designed to run when specific operations occur on a table, su
 
 Head to the `Events` tab of the Hasura Console and click `Create`:
 
-![alt text](/resource/img/create-trigger.jpg)
+![alt text](create-trigger.jpg)
+
+# Step 2: Configure the Event Trigger
+
+First, provide a name for your trigger, e.g., `order_status_change`. Choose the `public` schema and the `orders` table. 
+Then, select the `update` operation under Trigger Operations.
+Then, select the `status` column under `Listen columns for update`.
+
+Finally, enter a webhook URL that will be called when the event is triggered. This webhook will be responsible for parsing the body of the request and sending the email to the new user; it can be hosted anywhere, and written in any language you like.
+
+The route on our webhook we'll use is /status-update. Below, we'll see what this looks like with a service like ngrok, but the format will follow this template:
+
+`https://<your-webhook-url>/status-update`
+![alt text](create-trigger-step-2.jpg)
+
+
