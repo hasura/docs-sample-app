@@ -49,8 +49,8 @@ app.post('/status-change', async (req, res) => {
   }
 
   // parse the status from the event payload
-  const orderStatus = req.body.event.data.new.order_status;
-  const orderId = req.body.event.data.new.order_id;
+  const orderStatus = req.body.event.data.new.status;
+  const orderId = req.body.event.data.new.id;
   const userId = req.body.event.data.new.user_id;
   
   // send notification to user
