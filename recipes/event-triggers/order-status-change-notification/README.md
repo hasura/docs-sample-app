@@ -22,7 +22,7 @@ Event Triggers are designed to run when specific operations occur on a table, su
 
 Head to the `Events` tab of the Hasura Console and click `Create`:
 
-![alt text](create-trigger.jpg)
+![alt text](img/create-trigger.jpg)
 
 # Step 2: Configure the Event Trigger
 
@@ -36,7 +36,7 @@ The route on our webhook we'll use is /status-change. Below, we'll see what this
 
 `https://<your-webhook-url>/status-change`
 
-![alt text](create-trigger-step-2.jpg)
+![alt text](img/create-trigger-step-2.jpg)
 
 > **_NOTE_**: TUNNELING YOUR WEBHOOK ENDPOINT
 > Since our project is running on Hasura Cloud, and our handler will run on our local machine, we'll use ngrok to expose the webhook endpoint to the internet. This will allow us to expose a public URL that will forward requests to our local machine and the server we'll configure below.
@@ -54,10 +54,25 @@ Whenever a status is changed in `orders` table, the Event Trigger fires. Hasura 
 
 Event Triggers sent by Hasura to your webhook as a request include a payload with event data nested inside the body object of the request. This event object can then be parsed and values extracted from it to be used in your webhook:
 
-![alt text](event-invocation.jpg)
+![alt text](img/event-invocation.jpg)
 
 Below, we've written an example of webhook. As we established earlier, this runs on port 4000. If you're attempting to run this locally, follow the instructions below. If you're running this in a hosted environment, use this code as a guide to write your own webhook
 
 ```
+app.post('/status-change', async (req, res) => {
+  ...
+  // parse the status from the event payload
+  const orderStatus = req.body.event.data.new.status;
+  const orderId = req.body.event.data.new.id;
+  const userId = req.body.event.data.new.user_id;
+  
+  // send notification to user
+  await sendNotification(userId, orderId, orderStatus);
 
+  // send some JSON to the client
+  res.json({
+    orderId: orderId,
+    orderStatus: orderStatus
+  });
+});
 ```
