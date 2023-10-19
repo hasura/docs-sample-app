@@ -95,4 +95,6 @@ We can then see processed event in Events tab-
 ![alt text](img/processed-event.jpg)
 
 We'll then see notification for that user.
+![alt text](img/query-notifications.jpg)
 
+![alt text](img/result-notifications.jpg)
