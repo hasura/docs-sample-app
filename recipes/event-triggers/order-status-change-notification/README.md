@@ -76,3 +76,23 @@ app.post('/status-change', async (req, res) => {
   });
 });
 ```
+
+## Step 4: Test the setup
+With your server running, Hasura should be able to hit the endpoint. We can test this by updating a status in orders table. Let's do this with the following mutation from the API tab of the Console.
+```
+mutation UpdateOrder {
+  update_orders(_set: {status: "Dispatched"}, 
+    where: {id: {_eq: "c7406b75-6b24-41e4-9c5b-ff3feada9447"}}) {
+    affected_rows
+  }
+}
+```
+
+![alt text](img/update-status-via-api.jpg)
+
+We can then see processed event in Events tab-
+
+![alt text](img/processed-event.jpg)
+
+We'll then see notification for that user.
+
