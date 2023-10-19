@@ -19,7 +19,7 @@ async function sendNotification(userId, orderId, orderStatus) {
     },
     body: JSON.stringify({
       query: `
-                mutation InsertNotification($user_id: uuid!, $order_id: uuid!, $message: String!) {
+                mutation InsertNotification($user_id: uuid!, $message: String!) {
                     insert_notifications_one(object: {user_id: $user_id, message: $message}) {
                         id
                     }
