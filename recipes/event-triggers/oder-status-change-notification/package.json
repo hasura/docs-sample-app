@@ -1,19 +1,17 @@
 {
-  "name": "gpt-content-moderation",
+  "name": "order-status-notifications",
   "version": "1.0.0",
-  "description": "A content moderation tool for Hasura Event Triggers and GPT-3.5",
+  "description": "Order Status Change Notifications using Hasura Event Triggers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js"
   },
   "keywords": [
-    "GPT-3.5",
     "Hasura",
-    "Event Triggers",
-    "Content Moderation"
+    "Event Triggers"
   ],
-  "author": "robertjdominguez",
+  "author": "harshalkh",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.2",
