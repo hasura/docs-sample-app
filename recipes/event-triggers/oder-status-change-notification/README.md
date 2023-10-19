@@ -37,4 +37,30 @@ The route on our webhook we'll use is /status-update. Below, we'll see what this
 `https://<your-webhook-url>/status-update`
 ![alt text](create-trigger-step-2.jpg)
 
+> **_NOTE_**: TUNNELING YOUR WEBHOOK ENDPOINT
+> Since our project is running on Hasura Cloud, and our handler will run on our local machine, we'll use ngrok to expose the webhook endpoint to the internet. This will allow us to expose a public URL that will forward requests to our local machine and the server we'll configure below.
 
+> You'll need to modify your webhook URL to use the public URL provided by ngrok.
+
+> After installing ngrok and authenticating, you can do this by running:
+
+> `ngrok http 4000`
+
+> Then, copy the Forwarding value for use in our webhook
+
+Under Advanced Settings, we can configure the headers that will be sent with the request. We'll add an authentication header to prevent abuse of the endpoint and ensure that only Hasura can trigger the event. Set the Key as secret-authorization-string and the Value as super_secret_string_123
+
+Before exiting, open the Add Request Options Transform section and check POST. Then, click Create Event Trigger.
+
+## Step 3: Create a webhook to handle the request
+Whenever a status is changed in `orders` table, the Event Trigger fires. Hasura will send a request to the webhook URL you provided. In this example, we're simply going to send a POST request. Our webhook will parse the request, ensure the header is correct, and then see a notification.
+
+Event Triggers sent by Hasura to your webhook as a request include a payload with event data nested inside the body object of the request. This event object can then be parsed and values extracted from it to be used in your webhook:
+
+![alt text](event-invocation.jpg)
+
+Below, we've written an example of webhook. As we established earlier, this runs on port 4000. If you're attempting to run this locally, follow the instructions below. If you're running this in a hosted environment, use this code as a guide to write your own webhook
+
+```
+
+```
