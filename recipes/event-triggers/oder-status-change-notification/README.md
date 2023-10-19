@@ -32,7 +32,7 @@ Then, select the `status` column under `Listen columns for update`.
 
 Finally, enter a webhook URL that will be called when the event is triggered. This webhook will be responsible for parsing the body of the request and sending the email to the new user; it can be hosted anywhere, and written in any language you like.
 
-The route on our webhook we'll use is /status-update. Below, we'll see what this looks like with a service like ngrok, but the format will follow this template:
+The route on our webhook we'll use is /status-change. Below, we'll see what this looks like with a service like ngrok, but the format will follow this template:
 
 `https://<your-webhook-url>/status-change`
 
