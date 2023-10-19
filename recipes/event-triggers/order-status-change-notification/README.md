@@ -78,7 +78,7 @@ app.post('/status-change', async (req, res) => {
 ```
 
 ## Step 4: Test the setup
-With your server running, Hasura should be able to hit the endpoint. We can test this by updating a status in orders table. Let's do this with the following mutation from the API tab of the Console.
+With your server running, Hasura should be able to hit the endpoint. We can test this by updating a `status` in `orders` table. Let's do this with the following mutation from the API tab of the Console.
 ```
 mutation UpdateOrder {
   update_orders(_set: {status: "Dispatched"}, 
@@ -98,3 +98,5 @@ We'll then see notification for that user.
 ![alt text](img/query-notifications.jpg)
 
 ![alt text](img/result-notifications.jpg)
+
+Feel free to customize the webhook implementation based on your specific requirements. Remember to handle error scenarios, implement necessary validations, and add appropriate security measures to your webhook endpoint.
