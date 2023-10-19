@@ -34,18 +34,15 @@ Finally, enter a webhook URL that will be called when the event is triggered. Th
 
 The route on our webhook we'll use is /status-update. Below, we'll see what this looks like with a service like ngrok, but the format will follow this template:
 
-`https://<your-webhook-url>/status-update`
+`https://<your-webhook-url>/status-change`
+
 ![alt text](create-trigger-step-2.jpg)
 
 > **_NOTE_**: TUNNELING YOUR WEBHOOK ENDPOINT
 > Since our project is running on Hasura Cloud, and our handler will run on our local machine, we'll use ngrok to expose the webhook endpoint to the internet. This will allow us to expose a public URL that will forward requests to our local machine and the server we'll configure below.
-
 > You'll need to modify your webhook URL to use the public URL provided by ngrok.
-
 > After installing ngrok and authenticating, you can do this by running:
-
 > `ngrok http 4000`
-
 > Then, copy the Forwarding value for use in our webhook
 
 Under Advanced Settings, we can configure the headers that will be sent with the request. We'll add an authentication header to prevent abuse of the endpoint and ensure that only Hasura can trigger the event. Set the Key as secret-authorization-string and the Value as super_secret_string_123
