@@ -19,21 +19,20 @@ async function sendNotification(userId, orderId, orderStatus) {
     },
     body: JSON.stringify({
       query: `
-                mutation InsertNotification($user_id: uuid!, $order_id: uuid!, $order_status: String!) {
-                    insert_notifications_one(object: {user_id: $user_id, order_id: $order_id, order_status: $order_status}) {
+                mutation InsertNotification($user_id: uuid!, $order_id: uuid!, $message: String!) {
+                    insert_notifications_one(object: {user_id: $user_id, message: $message}) {
                         id
                     }
                 }
             `,
       variables: {
         user_id: userId,
-        order_id: orderId,
-        order_status: orderStatus,
+        message: `Status of Order:${orderId} has been changed to: ${orderStatus}.`,
       },
     }),
   });
   console.log(
-    `Notification sent. The user has received the following notification: order_id=${orderId}, order_status=${orderStatus}.`
+    `Notification sent. The user has received the following notification: Status of Order:${orderId} has been changed to: ${orderStatus}.`
   );
   const { data } = await response.json();
   return data.insert_notifications_one;
