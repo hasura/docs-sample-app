@@ -2,6 +2,7 @@ SET standard_conforming_strings = off;
 SET check_function_bodies = false;
 SET escape_string_warning = off;
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE EXTENSION IF NOT EXISTS "vector";
 CREATE FUNCTION public.set_current_timestamp_updated_at() RETURNS trigger
     LANGUAGE plpgsql
     AS $$
@@ -73,6 +74,7 @@ CREATE TABLE public.products (
     category_id uuid NOT NULL,
     image text NOT NULL,
     country_of_origin text NOT NULL,
+    vector vector(50) NOT NULL,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
